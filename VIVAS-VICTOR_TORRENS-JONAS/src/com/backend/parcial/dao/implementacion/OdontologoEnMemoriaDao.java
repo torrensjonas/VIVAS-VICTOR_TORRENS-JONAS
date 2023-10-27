@@ -9,21 +9,23 @@ import java.util.List;
 
 public class OdontologoEnMemoriaDao implements IDao<Odontologo> {
 	private final Logger LOGGER = Logger.getLogger(OdontologoEnMemoriaDao.class);
-	private List<Odontologo> odontologoRepository;
-
-	public OdontologoEnMemoriaDao(List<Odontologo> odontoloRepository) {
-		this.odontologoRepository = odontoloRepository;
-	}
+	private List<Odontologo> odontologoRepository = new ArrayList<>();
 
 	@Override
 	public Odontologo registrar(Odontologo odontologo) {
 		odontologoRepository.add(odontologo);
 		return odontologo;
-
 	}
 
 	@Override
 	public List<Odontologo> buscarTodo() {
-		return  new ArrayList<>(odontologoRepository);
+		return new ArrayList<>(odontologoRepository);
 	}
 }
+
+
+
+
+
+
+

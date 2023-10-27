@@ -1,0 +1,27 @@
+[2023-10-27 00:17:20] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=1, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:17:20] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=2, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:17:20] [INFO ] [OdontologoDaoH2:74] Se encontraron 2
+[2023-10-27 00:22:10] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=3, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:22:10] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=4, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:22:10] [INFO ] [OdontologoDaoH2:74] Se encontraron 4
+[2023-10-27 00:26:40] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=5, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:26:40] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=6, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:26:40] [INFO ] [OdontologoDaoH2:74] Se encontraron 6
+[2023-10-27 00:27:08] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=7, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:27:09] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=8, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:27:09] [INFO ] [OdontologoDaoH2:74] Se encontraron 8
+[2023-10-27 00:27:21] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=9, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:27:21] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=10, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:27:21] [INFO ] [OdontologoDaoH2:74] Se encontraron 10
+[2023-10-27 00:27:34] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=11, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:27:34] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=12, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:27:34] [INFO ] [OdontologoDaoH2:74] Se encontraron 12
+[2023-10-27 00:29:00] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=13, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:29:00] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=14, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:29:00] [INFO ] [OdontologoDaoH2:74] Se encontraron 14
+[2023-10-27 00:29:16] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=15, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:29:16] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=16, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:29:16] [INFO ] [OdontologoDaoH2:74] Se encontraron 16
+[2023-10-27 00:30:29] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=17, numeroMatricula=12345, nombre='Juan', apellido='Pérez'}
+[2023-10-27 00:30:29] [INFO ] [OdontologoDaoH2:33] Odontolgo  guardado: Odontologo{id=18, numeroMatricula=54321, nombre='María', apellido='Gómez'}
+[2023-10-27 00:30:29] [INFO ] [OdontologoDaoH2:74] Se encontraron 18

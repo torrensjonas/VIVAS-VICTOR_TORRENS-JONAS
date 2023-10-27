@@ -1,3 +1,12 @@
 
-f
-java:S1128"IRemove this unused import 'com.backend.parcial.sevice.OdontologoService'.(”ÔÎå8¶þÒö¶1
+7
+java:S1220""Move this file to a named package.8ý©«ù¶1
+\
+java:S1854!"?Remove this useless assignment to local variable "odontologos".(…ë°È8¨Æ»ù¶1
+M
+java:S1481!"0Remove this unused "odontologos" local variable.(…ë°È8¸Æ»ù¶1
+l
+java:S1128
+"JRemove this unused import 'org.junit.jupiter.api.Assertions.assertEquals'.(ÚÈˆòÿÿÿÿÿ8¸Æ»ù¶1
+e
+java:S1128"HRemove this unused import 'org.junit.jupiter.api.Assertions.assertTrue'.(å¥Þ¬8¸Æ»ù¶1
