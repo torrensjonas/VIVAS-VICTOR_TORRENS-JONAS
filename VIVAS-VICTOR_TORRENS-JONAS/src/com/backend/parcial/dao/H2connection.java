@@ -7,6 +7,6 @@ import java.sql.SQLException;
 public class H2connection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName("org.h2.Driver");
-		return DriverManager.getConnection("jdbc:h2:~/", "sa", "sa");
+		return DriverManager.getConnection("jdbc:h2:~/odontologia", "sa", "sa");
 	}
 }
