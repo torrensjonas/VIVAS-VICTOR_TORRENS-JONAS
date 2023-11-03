@@ -1,6 +1,5 @@
 package com.backend.clinicaodontologica.dao;
 
-import com.backend.clinicaodontologica.model.Domicilio;
 
 import java.util.List;
 
@@ -10,5 +9,5 @@ public interface IDao<T> {
 	List<T> buscarTodos();
 
 
-	Domicilio buscarPorId(int id);
+	T buscarPorId(int id);
 }

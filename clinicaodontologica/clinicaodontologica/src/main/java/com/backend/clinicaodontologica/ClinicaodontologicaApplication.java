@@ -10,34 +10,30 @@ import java.sql.DriverManager;
 
 @SpringBootApplication
 public class ClinicaodontologicaApplication {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClinicaodontologicaApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(ClinicaodontologicaApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClinicaodontologicaApplication.class, args);
-		LOGGER.info(" Clinica Odontologica esta corriendo en el puerto http://localhost:8081");
+		crearTabla();
+		logger.info("ClinicaOdontologica is now running...http://localhost:8081");
 	}
 
-	private String crearTabla(){
+	private static void crearTabla() {
 		Connection connection = null;
 		try {
-
 			Class.forName("org.h2.Driver");
-			connection = DriverManager.getConnection
-					("jdbc:h2:~/odontologia;INIT=RUNSCRIPT FROM'create.sql'", "sa", "sa");
+			connection = DriverManager.getConnection("jdbc:h2:~/testClase;INIT=RUNSCRIPT FROM 'create.sql'", "sa", "sa");
 
-		} catch (Exception exception) {
-			exception.printStackTrace();
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				connection.close();
-			} catch (Exception exception) {
-				exception.printStackTrace();
-
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 		}
-		return crearTabla();
 	}
 
 }
+

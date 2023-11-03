@@ -1,11 +1,10 @@
 import com.backend.clinicaodontologica.dao.implementacion.OdontologoDaoH2;
 import com.backend.clinicaodontologica.model.Odontologo;
-import com.backend.clinicaodontologica.sevice.OdontologoService;
-import org.junit.Test;
+import com.backend.clinicaodontologica.service.inplementacion.OdontologoService;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.Assert.assertFalse;
 
 
 class OdontologoServiceTest {
@@ -16,8 +15,8 @@ class OdontologoServiceTest {
 	public void testListarTodosLosOdontologos() {
 		odontologoService = new OdontologoService(new OdontologoDaoH2());
 		// Ejecutar la prueba de listar todos los odontólogos
-		List<Odontologo> odontologos = odontologoService.buscarTodosOdontologos();
-		assertFalse(odontologos.isEmpty());
+		List<Odontologo> odontologos = odontologoService.listarIdontologos();
+		Assert.assertFalse(odontologos.isEmpty());
 	}
 }
 

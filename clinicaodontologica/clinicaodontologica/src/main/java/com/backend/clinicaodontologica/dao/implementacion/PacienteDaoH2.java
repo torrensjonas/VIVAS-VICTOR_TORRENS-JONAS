@@ -7,11 +7,13 @@ import com.backend.clinicaodontologica.model.Domicilio;
 import com.backend.clinicaodontologica.model.Paciente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PacienteDaoH2 implements IDao<Paciente> {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PacienteDaoH2.class);
@@ -30,7 +32,8 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 			domicilioDaoH2 = new DomicilioDaoH2();
 			Domicilio domicilioRegistrado = domicilioDaoH2.registrar(paciente.getDomicilio());
 
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PACIENTES (NOMBRE, APELLIDO, DNI, FECHA, DOMICILIO_ID) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PACIENTES" +
+					"(NOMBRE, APELLIDO, DNI, FECHA, DOMICILIO_ID) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, paciente.getNombre());
 			preparedStatement.setString(2, paciente.getApellido());
 			preparedStatement.setInt(3, paciente.getDni());
@@ -110,8 +113,37 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 	}
 
 	@Override
-	public Domicilio buscarPorId(int id) {
-		return null;
+	public Paciente buscarPorId(int id) {
+		Connection connection = null;
+		Paciente paciente = null;
+
+		try {
+			connection = H2connection.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PACIENTES WHERE ID = ?");
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				paciente = crearObjetoPaciente(resultSet);
+			}
+
+			if (paciente == null) LOGGER.error("No se ha encontrado el paciente con id: " + id);
+			else LOGGER.info("Se ha encontrado el paciente: " + paciente);
+
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (Exception ex) {
+				LOGGER.error("Ha ocurrido un error al intentar cerrar la base dato. " + ex.getMessage());
+				ex.printStackTrace();
+			}
+		}
+
+
+		return paciente;
 	}
 
 

@@ -115,12 +115,17 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 		try {
 			connection = H2connection.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM DOMICILIOS WHERE ID = ?");
-			ps.setInt(1, id);
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM DOMICILIOS WHERE ID = ?");
+			preparedStatement.setInt(1, id);
 
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				domicilio = new Domicilio(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				domicilio = new Domicilio(
+						resultSet.getInt(1),
+						resultSet.getString(2),
+						resultSet.getInt(3),
+						resultSet.getString(4),
+						resultSet.getString(5));
 			}
 
 			if (domicilio == null) LOGGER.error("No se ha encontrado el domicilio con id: " + id);
@@ -143,7 +148,12 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 
 	private Domicilio crearObjetoDomicilio(ResultSet resultSet) throws SQLException {
 
-		return new Domicilio(resultSet.getInt("id"), resultSet.getString("calle"), resultSet.getInt("numero"), resultSet.getString("localidad"), resultSet.getString("provincia"));
+		return new Domicilio(
+				resultSet.getInt("id"),
+				resultSet.getString("calle"),
+				resultSet.getInt("numero"),
+				resultSet.getString("localidad"),
+				resultSet.getString("provincia"));
 
 	}
 }

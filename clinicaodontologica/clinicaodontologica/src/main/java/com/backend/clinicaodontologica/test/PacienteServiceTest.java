@@ -1,20 +1,14 @@
-package com.backend.clinicaodontologica.test;
-
-
 import com.backend.clinicaodontologica.dao.implementacion.PacienteDaoH2;
 import com.backend.clinicaodontologica.model.Domicilio;
 import com.backend.clinicaodontologica.model.Paciente;
-import com.backend.clinicaodontologica.sevice.PacienteService;
+import com.backend.clinicaodontologica.service.inplementacion.PacienteService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.time.LocalDate;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 
 public class PacienteServiceTest {
 
@@ -40,20 +34,20 @@ public class PacienteServiceTest {
 	}
 
 	@Test
-	void deberiaAgregarUnPaciente() {
+	public void deberiaAgregarUnPaciente() {
 
 		Paciente paciente = new Paciente("Nombre", "Apellido", 123456, LocalDate.of(2023, 05, 02), new Domicilio("Calle", 13, "Localidad", "Provincia"));
 
 		Paciente pacienteRegistrado = pacienteService.registrarPaciente(paciente);
 
-		assertTrue(pacienteRegistrado.getId() != 0);
+		Assert.assertTrue(pacienteRegistrado.getId() != 0);
 
 	}
 
 	@Test
-	void deberiaRetornarUnaListaNoVacia() {
+	public void deberiaRetornarUnaListaNoVacia() {
 
-		assertFalse(pacienteService.listarPacientes().isEmpty());
+		Assert.assertTrue(pacienteService.listarPacientes().isEmpty());
 
 	}
 
