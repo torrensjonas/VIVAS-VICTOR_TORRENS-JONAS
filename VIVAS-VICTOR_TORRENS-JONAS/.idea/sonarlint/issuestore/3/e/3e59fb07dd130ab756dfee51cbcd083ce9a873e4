@@ -1,10 +1,0 @@
-
-7
-java:S1220""Move this file to a named package.8ÚÞÃö¶1
-e
-java:S2259N"HA "NullPointerException" could be thrown; "connection" is nullable here.(ôêÂœ8¤„Äö¶1
-q
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.( Ü¨ºøÿÿÿÿ8¥„Äö¶1
-l
-java:S2095B"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ö‚ÏÇ8¥„Äö¶1
-r	java:S116"QRename this field "LOGGER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©úï‘ÿÿÿÿÿ8¦„Äö¶1

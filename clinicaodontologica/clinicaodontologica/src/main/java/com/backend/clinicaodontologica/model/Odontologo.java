@@ -2,18 +2,18 @@ package com.backend.clinicaodontologica.model;
 
 public class Odontologo {
 	private int id;
-	private int matricula;
+	private String matricula;
 	private String nombre;
 	private String apellido;
 
-	public Odontologo(int id, int numeroMatricula, String nombre, String apellido) {
+	public Odontologo(int id, String matricula, String nombre, String apellido) {
 		this.id = id;
 		this.matricula = matricula;
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
 
-	public Odontologo(int numeroMatricula, String nombre, String apellido) {
+	public Odontologo(  String matricula, String nombre, String apellido) {
 		this.matricula = matricula;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -27,7 +27,7 @@ public class Odontologo {
 		this.id = id;
 	}
 
-	public int getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 

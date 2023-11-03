@@ -26,7 +26,7 @@ public class PacienteController {
 		model.addAttribute("nombre",paciente.getNombre());
 		model.addAttribute("apellido",paciente.getApellido());
 
-		return "index";
+		return "paciente";
 
 
 	}

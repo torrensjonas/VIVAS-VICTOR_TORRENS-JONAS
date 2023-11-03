@@ -71,7 +71,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
 				Odontologo odontologo = crearObjetoOdontologo(resultSet);
 				odontologos.add(odontologo);
 			}
-			LOGGER.info("Se encontraron " + odontologos.size());
+			LOGGER.info("Se encontraron " + odontologos.size()+" odontologos");
 		} catch (Exception exception) {
 			LOGGER.error(exception.getMessage());
 			exception.printStackTrace();
