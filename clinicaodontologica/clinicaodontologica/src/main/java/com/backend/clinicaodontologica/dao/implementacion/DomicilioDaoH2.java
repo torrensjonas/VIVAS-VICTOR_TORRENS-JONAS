@@ -73,7 +73,7 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 
 
 	@Override
-	public List<Domicilio> buscarTodos() {
+	public List<Domicilio> listarTodos() {
 		Connection connection = null;
 		List<Domicilio> domicilios = new ArrayList<>();
 
@@ -143,6 +143,16 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 			}
 		}
 		return domicilio;
+	}
+
+	@Override
+	public Domicilio actulizar(Domicilio domicilio) {
+		return null;
+	}
+
+	@Override
+	public Domicilio eliminar(int id) {
+		return null;
 	}
 
 

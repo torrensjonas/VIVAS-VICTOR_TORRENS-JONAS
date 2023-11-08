@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 
 public class OdontologoDaoH2 implements IDao<Odontologo> {
@@ -68,7 +69,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
 
 
 	@Override
-	public List<Odontologo> buscarTodos() {
+	public List<Odontologo> listarTodos() {
 		Connection connection = null;
 		List<Odontologo> odontologos = new ArrayList<>();
 
@@ -121,6 +122,16 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
 			}
 		}
 		return odontologo;
+	}
+
+	@Override
+	public Odontologo actulizar(Odontologo odontologo) {
+		return null;
+	}
+
+	@Override
+	public Odontologo eliminar(int id) {
+		return null;
 	}
 
 	private Odontologo crearObjetoOdontologo(ResultSet resultSet) throws SQLException {

@@ -3,8 +3,8 @@ import com.backend.clinicaodontologica.model.Domicilio;
 import com.backend.clinicaodontologica.model.Paciente;
 import com.backend.clinicaodontologica.service.inplementacion.PacienteService;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -29,6 +29,16 @@ public class OdontologoEnMemoriaDao implements IDao<Odontologo> {
 		return null;
 	}
 
+	@Override
+	public Odontologo actulizar(Odontologo odontologo) {
+		return null;
+	}
+
+	@Override
+	public Odontologo eliminar(int id) {
+		return null;
+	}
+
 
 }
 

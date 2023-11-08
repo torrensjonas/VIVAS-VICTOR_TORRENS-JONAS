@@ -1,4 +1,6 @@
 package com.backend.clinicaodontologica.model;
+//json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) -> entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
+
 
 public class Domicilio {
 	private int id;

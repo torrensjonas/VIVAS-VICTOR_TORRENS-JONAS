@@ -78,7 +78,7 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 	}
 
 	@Override
-	public List<Paciente> buscarTodos() {
+	public List<Paciente> listarTodos() {
 		Connection connection = null;
 		List<Paciente> pacientes = new ArrayList<>();
 
@@ -144,6 +144,104 @@ public class PacienteDaoH2 implements IDao<Paciente> {
 
 
 		return paciente;
+	}
+
+	@Override
+	public Paciente actulizar(Paciente pacienteActualizado) {
+		Connection connection = null;
+
+
+		try {
+			connection = H2connection.getConnection();
+			connection.setAutoCommit(false);
+
+
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PACIENTES " +
+					"SET NOMBRE = ?, APELLIDO = ?, DNI = ?, FECHA = ?, DOMICILIO_ID = ? " +
+					"WHERE ID = ?");
+			preparedStatement.setString(1, pacienteActualizado.getNombre());
+			preparedStatement.setString(2, pacienteActualizado.getApellido());
+			preparedStatement.setInt(3, pacienteActualizado.getDni());
+			preparedStatement.setDate(4, Date.valueOf(pacienteActualizado.getFechaIngreso()));
+			preparedStatement.setInt(5, pacienteActualizado.getDomicilio().getId());
+			preparedStatement.setInt(6, pacienteActualizado.getId());
+			preparedStatement.execute();
+
+
+			connection.commit();
+			LOGGER.info("El pacinte con id" + pacienteActualizado.getId() + "ha sido modificado: " + pacienteActualizado);
+
+		} catch (SQLException e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (Exception ex) {
+				LOGGER.error("Ha ocurrido un error al intentar cerrar la bdd. " + ex.getMessage());
+				ex.printStackTrace();
+			}
+		}
+
+		return pacienteActualizado;
+	}
+
+	@Override
+	public Paciente eliminar(int id) {
+		Connection connection = null;
+		Paciente pacienteEliminado = null;
+
+		try {
+			connection = H2connection.getConnection();
+			connection.setAutoCommit(false);
+
+			// Primero, verifica si el paciente existe
+			Paciente pacienteExistente = buscarPorId(id);
+
+			if (pacienteExistente != null) {
+				// Si el paciente existe, procede a eliminarlo
+				PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PACIENTES WHERE ID = ?");
+				preparedStatement.setInt(1, id);
+				int rowsDeleted = preparedStatement.executeUpdate();
+
+				if (rowsDeleted == 1) {
+					connection.commit();
+					pacienteEliminado = pacienteExistente;
+					LOGGER.info("Se ha eliminado el paciente con ID: " + id);
+				} else {
+					connection.rollback();
+					LOGGER.error("No se pudo eliminar el paciente con ID: " + id);
+				}
+			} else {
+				LOGGER.error("No se encontró un paciente con ID: " + id);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+			if (connection != null) {
+				try {
+					connection.rollback();
+					LOGGER.info("Tuvimos un problema al eliminar el paciente");
+					LOGGER.error(e.getMessage());
+					e.printStackTrace();
+				} catch (SQLException exception) {
+					LOGGER.error(exception.getMessage());
+					exception.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				connection.close();
+			} catch (Exception ex) {
+				LOGGER.error("No se pudo cerrar la conexión: " + ex.getMessage());
+			}
+		}
+
+		return pacienteEliminado;
 	}
 
 
