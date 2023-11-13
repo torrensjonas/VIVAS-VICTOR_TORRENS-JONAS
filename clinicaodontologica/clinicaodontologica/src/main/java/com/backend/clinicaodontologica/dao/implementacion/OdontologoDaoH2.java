@@ -3,7 +3,7 @@ package com.backend.clinicaodontologica.dao.implementacion;
 
 import com.backend.clinicaodontologica.dao.H2connection;
 import com.backend.clinicaodontologica.dao.IDao;
-import com.backend.clinicaodontologica.model.Odontologo;
+import com.backend.clinicaodontologica.entity.Odontologo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 
 public class OdontologoDaoH2 implements IDao<Odontologo> {
 	private final Logger LOGGER = LoggerFactory.getLogger(OdontologoDaoH2.class);

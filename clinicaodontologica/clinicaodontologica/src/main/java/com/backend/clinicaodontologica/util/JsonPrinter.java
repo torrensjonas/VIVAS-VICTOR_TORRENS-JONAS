@@ -12,4 +12,5 @@ public class JsonPrinter {
 		return gson.toJson(t).trim().replace("\n", "").replace("\t", "");
 
 	}
+
 }

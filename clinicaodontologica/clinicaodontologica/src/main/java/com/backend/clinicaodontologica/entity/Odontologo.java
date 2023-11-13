@@ -1,4 +1,4 @@
-package com.backend.clinicaodontologica.model;
+package com.backend.clinicaodontologica.entity;
 
 public class Odontologo {
 	private int id;

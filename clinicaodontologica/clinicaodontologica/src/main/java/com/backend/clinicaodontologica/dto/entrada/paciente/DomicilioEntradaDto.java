@@ -5,6 +5,9 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+//Todos los datos de la direccion que le pediremos al Paciente que ingrece
+//Todos  son von Bin Validecion
+
 public class DomicilioEntradaDto {
 	@NotNull(message = "la calle no puede ser nula")
 	@NotBlank(message = "El campo calle no puede estar en blanco")

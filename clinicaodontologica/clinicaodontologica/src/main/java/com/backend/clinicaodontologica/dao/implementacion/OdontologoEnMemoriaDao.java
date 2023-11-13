@@ -2,7 +2,7 @@ package com.backend.clinicaodontologica.dao.implementacion;
 
 
 import com.backend.clinicaodontologica.dao.IDao;
-import com.backend.clinicaodontologica.model.Odontologo;
+import com.backend.clinicaodontologica.entity.Odontologo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +19,10 @@ public class OdontologoEnMemoriaDao implements IDao<Odontologo> {
 		return odontologo;
 	}
 
+
+
 	@Override
-	public List<Odontologo> buscarTodos() {
+	public List<Odontologo> listarTodos() {
 		return new ArrayList<>(odontologoRepository);
 	}
 

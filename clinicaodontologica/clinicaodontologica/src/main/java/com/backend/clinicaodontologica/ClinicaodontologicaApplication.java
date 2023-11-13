@@ -19,10 +19,6 @@ public class ClinicaodontologicaApplication {
 		crearTabla();
 		logger.info("ClinicaOdontologica is now running...http://localhost:8081");
 	}
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
 
 	private static void crearTabla() {
 		Connection connection = null;
@@ -41,6 +37,10 @@ public class ClinicaodontologicaApplication {
 		}
 	}
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 
 
 }

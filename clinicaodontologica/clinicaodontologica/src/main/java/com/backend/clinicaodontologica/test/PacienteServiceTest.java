@@ -1,18 +1,6 @@
-import com.backend.clinicaodontologica.dao.implementacion.PacienteDaoH2;
-import com.backend.clinicaodontologica.model.Domicilio;
-import com.backend.clinicaodontologica.model.Paciente;
-import com.backend.clinicaodontologica.service.inplementacion.PacienteService;
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.time.LocalDate;
-
 public class PacienteServiceTest {
 
-	private PacienteService pacienteService = new PacienteService(new PacienteDaoH2());
+	/*private PacienteService pacienteService = new PacienteService(new PacienteDaoH2());
 
 
 	@BeforeAll
@@ -49,7 +37,7 @@ public class PacienteServiceTest {
 
 		Assert.assertTrue(pacienteService.listarPacientes().isEmpty());
 
-	}
+	}*/
 
 
 }

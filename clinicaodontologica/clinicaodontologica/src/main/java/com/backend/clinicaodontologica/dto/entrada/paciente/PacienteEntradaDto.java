@@ -1,7 +1,6 @@
 package com.backend.clinicaodontologica.dto.entrada.paciente;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
@@ -9,6 +8,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+
+//Todos los datos que le pediremos al Paciente que ingrece
 
 public class PacienteEntradaDto {
 	@NotNull(message = "El campo nombre no puede ser nulo")
