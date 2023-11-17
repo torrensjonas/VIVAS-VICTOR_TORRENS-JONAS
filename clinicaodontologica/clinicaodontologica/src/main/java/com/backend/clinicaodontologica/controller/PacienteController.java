@@ -2,10 +2,9 @@ package com.backend.clinicaodontologica.controller;
 
 
 import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
+import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
-import com.backend.clinicaodontologica.repository.OdontologoRepocitory;
-import com.backend.clinicaodontologica.service.IPacienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.backend.clinicaodontologica.service.inplementacion.PacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +16,9 @@ import java.util.List;
 @RequestMapping("/api/pacientes")
 public class PacienteController {
 
-	private IPacienteService pacienteService;
+	private PacienteService pacienteService;
 
-
-	public PacienteController(IPacienteService pacienteService) {
+	public PacienteController(PacienteService pacienteService) {
 		this.pacienteService = pacienteService;
 	}
 
@@ -32,49 +30,33 @@ public class PacienteController {
 
 	// GET - Buscar un paciente por ID
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarPacientePorId(@PathVariable int id) {
-		PacienteSalidaDto paciente = pacienteService.buscarPacientePorId(id);
-		if (paciente != null) {
-			return new ResponseEntity<>(paciente, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Paciente no encontrado", HttpStatus.NOT_FOUND);
-		}
+	public ResponseEntity<PacienteSalidaDto> buscarPacientePorId(@PathVariable Long id) {
+		return new ResponseEntity<>(pacienteService.buscarPacientePorId(id), HttpStatus.OK);
+
 	}
 
 
 	// GET - Listar todos los pacientes
 	@GetMapping("/listar")
-	public ResponseEntity<?> listarPacientes() {
-		List<PacienteSalidaDto> pacientesSalida = pacienteService.listarPacientes();
+	public ResponseEntity<List<PacienteSalidaDto>> listarPacientes() {
+		return new ResponseEntity<>(pacienteService.listarPacientes(), HttpStatus.OK);
 
-		if (pacientesSalida.isEmpty()) {
-			// Si la lista de pacientes está vacía, devuelve un ResponseEntity con un mensaje y HttpStatus.NO_CONTENT
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No hay pacientes registrados");
-		} else {
-			// Si se encontraron pacientes, devuélvelos con HttpStatus.OK
-			return new ResponseEntity<>(pacientesSalida, HttpStatus.OK);
-		}
+
 	}
 
 	// PUT - Actualizar un paciente por ID
-	@PutMapping("/{id}")
-	public ResponseEntity<?> actualizarPaciente(@PathVariable int id, @RequestBody @Valid PacienteEntradaDto pacienteEntradaDto) {
-		PacienteSalidaDto pacienteActualizado = pacienteService.actualizarPaciente(id, pacienteEntradaDto);
-		if (pacienteActualizado != null) {
-			return new ResponseEntity<>(pacienteActualizado, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Paciente no encontrado", HttpStatus.NOT_FOUND);
-		}
+	@PutMapping("/actualizar")
+	public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) {
+		return pacienteService.actualizarPaciente(paciente);
 	}
 
-	// DELETE - Eliminar un paciente por ID
 	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<Void> borrarPaciente(@PathVariable int id) {
-		PacienteSalidaDto pacienteEliminado = pacienteService.eliminarPaciente(id);
-		if (pacienteEliminado != null) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<?> eliminarPaciente(@PathVariable Long id) {
+		try {
+			pacienteService.eliminarPaciente(id);
+			return new ResponseEntity<>("Paciente eliminado correctamente", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error al eliminar el paciente: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

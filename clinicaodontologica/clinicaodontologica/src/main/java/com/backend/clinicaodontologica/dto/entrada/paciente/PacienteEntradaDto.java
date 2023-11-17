@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-
 //Todos los datos que le pediremos al Paciente que ingrece
 
 public class PacienteEntradaDto {
@@ -23,26 +22,25 @@ public class PacienteEntradaDto {
 	private String apellido;
 
 	@NotNull(message = "El campo DNI no puede ser nulo")
-	@Size(max = 12, message = "El DNI debe contener hasta 12 numeros")
-	private Integer dni;
 
-	@NotNull(message = "La fecha de ingreso no puede ser nula")
+	private Integer dni;
 	@FutureOrPresent(message = "La fecha no puede ser anterior al dia de hoy")
+	@NotNull(message = "La fecha de ingreso no puede ser nula")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate fechaIngreso;
 	@NotNull(message = "La domicilio del paciente  no puede ser nula")
 	@Valid
-	private DomicilioEntradaDto domicilioEntradaDto;
+	private DomicilioEntradaDto domicilio;
 
 	public PacienteEntradaDto() {
 	}
 
-	public PacienteEntradaDto(String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilioEntradaDto) {
+	public PacienteEntradaDto(String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.fechaIngreso = fechaIngreso;
-		this.domicilioEntradaDto = domicilioEntradaDto;
+		this.domicilio = domicilio;
 	}
 
 	public String getNombre() {
@@ -77,12 +75,12 @@ public class PacienteEntradaDto {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public DomicilioEntradaDto getDomicilioEntradaDto() {
-		return domicilioEntradaDto;
+	public DomicilioEntradaDto getDomicilio() {
+		return domicilio;
 	}
 
-	public void setDomicilioEntradaDto(DomicilioEntradaDto domicilioEntradaDto) {
-		this.domicilioEntradaDto = domicilioEntradaDto;
+	public void setDomicilio(DomicilioEntradaDto domicilio) {
+		this.domicilio = domicilio;
 	}
 }
 

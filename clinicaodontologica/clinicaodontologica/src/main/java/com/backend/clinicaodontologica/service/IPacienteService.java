@@ -2,6 +2,7 @@ package com.backend.clinicaodontologica.service;
 
 
 import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
+import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 
 import java.util.List;
@@ -11,12 +12,11 @@ public interface IPacienteService {
 
 	List<PacienteSalidaDto> listarPacientes();
 
-	PacienteSalidaDto buscarPacientePorId(int id);
+	PacienteSalidaDto buscarPacientePorId(Long id);
 
-	PacienteSalidaDto actualizarPaciente(int id, PacienteEntradaDto pacienteEntradaDto);
+	PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto pacienteModificacionEntradaDto);
 
-	PacienteSalidaDto eliminarPaciente(int id);
-
+	void eliminarPaciente(Long id);
 
 
 }

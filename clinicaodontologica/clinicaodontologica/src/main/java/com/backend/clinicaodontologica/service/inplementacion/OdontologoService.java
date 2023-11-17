@@ -1,14 +1,17 @@
 package com.backend.clinicaodontologica.service.inplementacion;
 
-import com.backend.clinicaodontologica.dao.IDao;
+
 import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaDto;
+import com.backend.clinicaodontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
 import com.backend.clinicaodontologica.entity.Odontologo;
+import com.backend.clinicaodontologica.repository.OdontologoRepository;
 import com.backend.clinicaodontologica.service.IOdontologoService;
 import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,21 +20,25 @@ import java.util.List;
 
 public class OdontologoService implements IOdontologoService {
 	private final Logger LOGGER = LoggerFactory.getLogger(OdontologoService.class);
-	private IDao<Odontologo> odontologoIDao;
-	private ModelMapper modelMapper;
 
-	public OdontologoService(IDao<Odontologo> odontologoIDao, ModelMapper modelMapper) {
-		this.odontologoIDao = odontologoIDao;
+	private final OdontologoRepository iOdontologoRepository;
+
+	private final ModelMapper modelMapper;
+
+	@Autowired
+	public OdontologoService(OdontologoRepository iOdontologoRepository, ModelMapper modelMapper) {
+		this.iOdontologoRepository = iOdontologoRepository;
 		this.modelMapper = modelMapper;
 	}
 
+
 	@Override
-	public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologoEntradaDto) {
+	public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo) {
 		//convertimos mediante el mapper de dtoEntrada a entidad
-		LOGGER.info("OdontologEntredaDto:" + JsonPrinter.toString(odontologoEntradaDto));
-		Odontologo odontologoEntidad = modelMapper.map(odontologoEntradaDto, Odontologo.class);
+		LOGGER.info("OdontologEntredaDto:" + JsonPrinter.toString(odontologo));
+		Odontologo odontologoEntidad = modelMapper.map(odontologo, Odontologo.class);
 		//mandamos a persistir a la capa dao y obtenemos una entidad
-		Odontologo odontologoAPersistir = odontologoIDao.registrar(odontologoEntidad);
+		Odontologo odontologoAPersistir = iOdontologoRepository.save(odontologoEntidad);
 		//transformamos la entidad obtenida en salidaDto
 		OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
 		LOGGER.info("OdontologoSalidaDto:" + JsonPrinter.toString(odontologoSalidaDto));
@@ -40,7 +47,7 @@ public class OdontologoService implements IOdontologoService {
 
 	@Override
 	public List<OdontologoSalidaDto> listarOdontologos() {
-		List<OdontologoSalidaDto> odontologoSalidaDtos = odontologoIDao.listarTodos().stream()
+		List<OdontologoSalidaDto> odontologoSalidaDtos = iOdontologoRepository.findAll().stream()
 				.map(odontologo -> modelMapper.map(odontologo, OdontologoSalidaDto.class)).toList();
 
 		LOGGER.info("Listado de todos los Odontologos:{}", odontologoSalidaDtos);
@@ -49,43 +56,44 @@ public class OdontologoService implements IOdontologoService {
 	}
 
 	@Override
-	public OdontologoSalidaDto buscarOdontologoPorId(int id) {
-		Odontologo odontologoBuscado = odontologoIDao.buscarPorId(id);
+	public OdontologoSalidaDto buscarOdontologoPorId(Long id) {
+		Odontologo odontologoBuscado = iOdontologoRepository.findById(id).orElse(null);
 		OdontologoSalidaDto odontologoEncontrado = null;
 		if (odontologoBuscado != null) {
+
 			odontologoEncontrado = modelMapper.map(odontologoBuscado, OdontologoSalidaDto.class);
 			LOGGER.info("Odontologo encontrado:{}", JsonPrinter.toString(odontologoBuscado));
-		}
+		} else LOGGER.error("El id no se encuentra registrado en la base de datos");
 		return odontologoEncontrado;
 	}
 
 	@Override
-	public OdontologoSalidaDto actualizarOdontologo(int id, OdontologoEntradaDto odontologoEntradaDto) {
-		Odontologo odontologoExistente = odontologoIDao.buscarPorId(id); // Supongo que hay un método buscarPorId que recibe un ID
-		if (odontologoExistente != null) {
-			// Actualiza los campos del paciente existente con los valores de pacienteEntradaDto
-			modelMapper.map(odontologoEntradaDto, odontologoExistente);
-			Odontologo odontologoActualizado = odontologoIDao.actulizar(odontologoExistente);
-			LOGGER.info("Odontologo actualizado: {}", JsonPrinter.toString(odontologoActualizado));
-			return modelMapper.map(odontologoActualizado, OdontologoSalidaDto.class);
+	public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) {
+		Odontologo odontologoRecibido = modelMapper.map(odontologo, Odontologo.class);
+		Odontologo odontologoActualizar = iOdontologoRepository.findById(odontologoRecibido.getId()).orElse(null);
+		OdontologoSalidaDto odontologoSalidaDto = null;
+		if (odontologoActualizar != null) {
+			odontologoActualizar = odontologoRecibido;
+			iOdontologoRepository.save(odontologoActualizar);
+			odontologoSalidaDto = modelMapper.map(odontologoActualizar, OdontologoSalidaDto.class);
+			LOGGER.warn("Odontologo actualizado: {}", JsonPrinter.toString(odontologoSalidaDto));
+
 		} else {
-			// Si el paciente no se encuentra, puedes devolver null o lanzar una excepción
-			// según tu estrategia de manejo de errores.
-			return null;
+			LOGGER.error("No fue pocible actualizar el paciente,no esta en la base datos");
+
 		}
+		return odontologoSalidaDto;
 	}
 
 	@Override
-	public OdontologoSalidaDto eliminarOdontologo(int id) {
-		Odontologo odontologoAEliminar = odontologoIDao.buscarPorId(id);
-		if (odontologoAEliminar != null) {
-			odontologoIDao.eliminar(id);
-			LOGGER.info("Odontologo eliminado: {}", JsonPrinter.toString(odontologoAEliminar));
-			return modelMapper.map(odontologoAEliminar, OdontologoSalidaDto.class);
+	public void eliminarOdontologo(Long id) {
+
+		if (iOdontologoRepository.findById(id).orElse(null) != null) {
+			iOdontologoRepository.deleteById(id);
+			LOGGER.info("Odontologo eliminado con id: {}", id);
+
 		} else {
-			// Si no se encontró el paciente a eliminar, puedes devolver null o lanzar una excepción
-			// según tu estrategia de manejo de errores.
-			return null;
+			LOGGER.error("No se ha podido encontrar el odontologo co id:{}", id);
 		}
 	}
 }

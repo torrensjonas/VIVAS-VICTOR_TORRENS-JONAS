@@ -1,34 +1,37 @@
 package com.backend.clinicaodontologica.entity;
-//json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) -> entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
+//json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) ->
+// entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
 
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "DOMICILIOS")
 public class Domicilio {
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String calle;
 	private int numero;
 	private String localidad;
 	private String provincia;
 
-	public Domicilio(int id, String calle, int numero, String localidad, String provincia) {
-		this.id = id;
-		this.calle = calle;
-		this.numero = numero;
-		this.localidad = localidad;
-		this.provincia = provincia;
+	public Domicilio() {
 	}
 
 	public Domicilio(String calle, int numero, String localidad, String provincia) {
+
 		this.calle = calle;
 		this.numero = numero;
 		this.localidad = localidad;
 		this.provincia = provincia;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,10 +65,5 @@ public class Domicilio {
 
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
-	}
-
-	@Override
-	public String toString() {
-		return "Id: " + id + " - Calle: " + calle + " - Numero: " + numero + " - Localidad: " + localidad + " - Provincia: " + provincia;
 	}
 }
