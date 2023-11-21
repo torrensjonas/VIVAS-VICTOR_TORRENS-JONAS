@@ -1,0 +1,44 @@
+<!-- gestionarTurnos.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style_turno.css">
+    <title>Gestión de Turnos</title>
+    <!-- Agrega tus enlaces a archivos CSS y scripts JS según sea necesario -->
+</head>
+<body>
+<h2>Gestión de Turnos</h2>
+
+<form id="formulario_turno">
+    <label for="fechaYHora">Fecha y Hora:</label>
+    <input id="fechaYHora" name="fechaYHora" required type="datetime-local"/>
+    <span class="error" id="errorFechaYHora"></span>
+    <br>
+
+    <!-- Añade elementos para seleccionar odontólogo y paciente -->
+    <label for="odontologo">Odontólogo:</label>
+    <select id="odontologo" name="odontologo" required>
+        <!-- Opciones para seleccionar odontólogo -->
+    </select>
+    <span class="error" id="errorOdontologo"></span>
+    <br>
+
+    <label for="paciente">Paciente:</label>
+    <select id="paciente" name="paciente" required>
+        <!-- Opciones para seleccionar paciente -->
+    </select>
+    <span class="error" id="errorPaciente"></span>
+    <br>
+
+    <button type="submit">Programar Turno</button>
+</form>
+
+<br>
+<a href="index.html">Volver a la página de inicio</a>
+
+<!-- Agrega tus enlaces a archivos JS al final del body si es necesario -->
+<script src="../static/js/gestionar_Turno.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

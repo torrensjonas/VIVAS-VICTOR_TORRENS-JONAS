@@ -13,8 +13,8 @@ public class Paciente {
 	private String nombre;
 	@Column(length = 50)
 	private String apellido;
-	@Column(length = 10)
-	private int dni;
+	@Column(length = 50)
+	private Long dni;
 	private LocalDate fechaIngreso;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "domicilio_id", referencedColumnName = "id")
@@ -24,7 +24,7 @@ public class Paciente {
 	public Paciente() {
 	}
 
-	public Paciente(String nombre, String apellido, int dni, LocalDate fechaIngreso, Domicilio domicilio) {
+	public Paciente(String nombre, String apellido, Long dni, LocalDate fechaIngreso, Domicilio domicilio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
@@ -53,11 +53,11 @@ public class Paciente {
 		this.apellido = apellido;
 	}
 
-	public int getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 

@@ -1,0 +1,63 @@
+<!-- registroPaciente.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Registro de Paciente</title>
+    <!-- Agrega tus enlaces a archivos CSS y scripts JS según sea necesario -->
+</head>
+<body>
+<h2>Registro de Paciente</h2>
+<form id="registro_formulario_paciente">
+    <label for="nombre">Nombre:</label>
+    <input class="form-input" id="nombre" name="nombre" required type="text"/>
+    <span class="error" id="errorNombre"></span>
+    <br>
+
+    <label for="apellido">Apellido:</label>
+    <input class="form-input" id="apellido" name="apellido" required type="text"/>
+    <span class="error" id="errorApellido"></span>
+    <br>
+
+    <label for="dni">DNI:</label>
+    <input class="form-input" id="dni" name="dni" required type="number"/>
+    <span class="error" id="errorDni"></span>
+    <br>
+
+    <label for="fechaIngreso">Fecha de Ingreso:</label>
+    <input class="form-input" id="fechaIngreso" name="fechaIngreso" required type="date"/>
+    <span class="error" id="errorFechaIngreso"></span>
+    <br>
+
+    <label for="calle">Calle:</label>
+    <input class="form-input" id="calle" name="calle" required type="text"/>
+    <span class="error" id="errorCalle"></span>
+    <br>
+
+    <label for="numero">Número:</label>
+    <input class="form-input" id="numero" name="numero" required type="text"/>
+    <span class="error" id="errorNumero"></span>
+    <br>
+
+    <label for="localidad">Localidad:</label>
+    <input class="form-input" id="localidad" name="localidad" required type="text"/>
+    <span class="error" id="errorLocalidad"></span>
+    <br>
+     <label for="provincia">Provincia:</label>
+    <input class="form-input" id="provincia" name="provincia" required type="text"/>
+    <span class="error" id="errorProvincia"></span>
+    <br>
+
+    <!-- Puedes agregar más campos para la dirección según tus necesidades -->
+
+    <button  type="submit">Registrar Paciente</button>
+</form>
+<br>
+<a href="index.html">Volver a la página de inicio</a>
+
+<!-- Agrega tus enlaces a archivos JS al final del body si es necesario -->
+<script src="../static/js/crear_Pacie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

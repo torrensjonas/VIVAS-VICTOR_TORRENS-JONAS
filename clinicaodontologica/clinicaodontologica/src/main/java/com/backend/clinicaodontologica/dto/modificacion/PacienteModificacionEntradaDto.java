@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class PacienteModificacionEntradaDto {
 
-	@NotNull(message = "Debe proveerse el id del paciente que se desea modificar")
+	//@NotNull(message = "Debe proveerse el id del paciente que se desea modificar")
 	private Long id;
 
 	@NotNull(message = "El nombre del paciente no puede ser nulo")

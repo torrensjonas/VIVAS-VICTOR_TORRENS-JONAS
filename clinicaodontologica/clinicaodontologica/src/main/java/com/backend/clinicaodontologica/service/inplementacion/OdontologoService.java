@@ -11,7 +11,6 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class OdontologoService implements IOdontologoService {
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
 	public OdontologoService(OdontologoRepository iOdontologoRepository, ModelMapper modelMapper) {
 		this.iOdontologoRepository = iOdontologoRepository;
 		this.modelMapper = modelMapper;
@@ -96,4 +94,6 @@ public class OdontologoService implements IOdontologoService {
 			LOGGER.error("No se ha podido encontrar el odontologo co id:{}", id);
 		}
 	}
+
+
 }

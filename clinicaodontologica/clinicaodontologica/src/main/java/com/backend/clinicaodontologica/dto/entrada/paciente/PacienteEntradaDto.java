@@ -22,8 +22,7 @@ public class PacienteEntradaDto {
 	private String apellido;
 
 	@NotNull(message = "El campo DNI no puede ser nulo")
-
-	private Integer dni;
+	private Long dni;
 	@FutureOrPresent(message = "La fecha no puede ser anterior al dia de hoy")
 	@NotNull(message = "La fecha de ingreso no puede ser nula")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -35,7 +34,8 @@ public class PacienteEntradaDto {
 	public PacienteEntradaDto() {
 	}
 
-	public PacienteEntradaDto(String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilio) {
+	public PacienteEntradaDto(String nombre, String apellido, Long dni, LocalDate fechaIngreso,
+			DomicilioEntradaDto domicilio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
@@ -59,11 +59,11 @@ public class PacienteEntradaDto {
 		this.apellido = apellido;
 	}
 
-	public Integer getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(Integer dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 
@@ -83,9 +83,3 @@ public class PacienteEntradaDto {
 		this.domicilio = domicilio;
 	}
 }
-
-
-
-
-
-

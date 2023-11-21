@@ -1,0 +1,37 @@
+<!-- registroOdontologo.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Registro de Odontólogo</title>
+    <!-- Agrega tus enlaces a archivos CSS y scripts JS según sea necesario -->
+</head>
+<body>
+<h2>Registro de Odontólogo</h2>
+<form id="registroFormulario">
+    <label for="matricula">Matrícula:</label>
+    <input id="matricula" name="matricula" required type="text"/>
+    <span class="error" id="errorMatricula"></span>
+    <br>
+
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" name="nombre" required type="text"/>
+    <span class="error" id="errorNombre"></span>
+    <br>
+
+    <label for="apellido">Apellido:</label>
+    <input id="apellido" name="apellido" required type="text"/>
+    <span class="error" id="errorApellido"></span>
+    <br>
+
+   <button type="submit">Registrar Odontólogo</button>
+</form>
+<br>
+<a href="index.html">Volver a la página de inicio</a>
+
+<!-- Agrega tus enlaces a archivos JS al final del body si es necesario -->
+<script src="../static/js/crear_Odon.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

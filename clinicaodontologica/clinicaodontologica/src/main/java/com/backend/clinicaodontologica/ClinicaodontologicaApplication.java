@@ -8,8 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+
 public class ClinicaodontologicaApplication {
 	private static Logger logger = LoggerFactory.getLogger(ClinicaodontologicaApplication.class);
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClinicaodontologicaApplication.class, args);
@@ -22,7 +24,5 @@ public class ClinicaodontologicaApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-
-
 }
 

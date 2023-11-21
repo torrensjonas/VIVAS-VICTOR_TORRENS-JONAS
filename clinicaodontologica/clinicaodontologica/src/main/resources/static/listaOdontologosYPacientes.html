@@ -1,0 +1,53 @@
+<!-- lista.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="../static/css/estyle_listado.css">
+    <meta charset="UTF-8">
+    <title>Listado de Pacientes y Odontólogos</title>
+    <!-- Agrega tus enlaces a archivos CSS y scripts JS según sea necesario -->
+</head>
+<body>
+<h2>Listado de Pacientes y Odontólogos</h2>
+
+<h3>Pacientes</h3>
+<table border="1" id="tablaPacientes">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Fecha Ingreso</th>
+        <th>Calle</th>
+        <th>Numero</th>
+        <th>Localidad</th>
+        <th>Provincia</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpoTablaPacientes">
+    <!-- Aquí se mostrará la lista de pacientes -->
+    </tbody>
+</table>
+
+<h3>Odontólogos</h3>
+<table border="1" id="tablaOdontologos">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Matrícula</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpoTablaOdontologos">
+    <!-- Aquí se mostrará la lista de odontólogos -->
+    </tbody>
+</table>
+
+<br>
+<a href="index.html">Volver a la página de inicio</a>
+
+<!-- Agrega tus enlaces a archivos JS al final del body si es necesario -->
+<script src="../static/js/listar_Odon_y_Paci.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

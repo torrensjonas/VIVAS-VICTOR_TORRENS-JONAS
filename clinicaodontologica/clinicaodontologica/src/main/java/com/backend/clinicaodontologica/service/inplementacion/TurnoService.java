@@ -10,7 +10,6 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +22,12 @@ public class TurnoService implements ITurnoService {
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
 	public TurnoService(TurnoRepository turnoRepository, ModelMapper modelMapper) {
 		this.turnoRepository = turnoRepository;
 		this.modelMapper = modelMapper;
-		configuracionMapping();
+		configurarMopeoTuro();
+
+
 	}
 
 	@Override
@@ -73,12 +73,21 @@ public class TurnoService implements ITurnoService {
 			LOGGER.warn("Se eliminoe el turno con id:{}", id);
 		} else LOGGER.error("No se ha encontrado el paciente con id:{}", id);
 	}
-	private void configuracionMapping(){
-		// Configurar un mapeo de TurnoEntradaDto a Turno
+
+
+	private void configurarMopeoTuro() {
+		// Configurar mapeo de TurnoEntradaDto a Turno
 		modelMapper.typeMap(TurnoEntradaDto.class, Turno.class)
 				.addMapping(TurnoEntradaDto::getFechaYHora, Turno::setFechaYHora)
 				.addMapping(TurnoEntradaDto::getOdontologo, Turno::setOdontologo)
 				.addMapping(TurnoEntradaDto::getPaciente, Turno::setPaciente);
+
+		// Configurar mapeo inverso de Turno a TurnoSalidaDto
+		modelMapper.typeMap(Turno.class, TurnoSalidaDto.class)
+				.addMapping(Turno::getFechaYHora, TurnoSalidaDto::setFechaYHora)
+				.addMapping(Turno::getOdontologo, TurnoSalidaDto::setOdontologo)
+				.addMapping(Turno::getPaciente, TurnoSalidaDto::setPaciente);
 	}
+
 }
 

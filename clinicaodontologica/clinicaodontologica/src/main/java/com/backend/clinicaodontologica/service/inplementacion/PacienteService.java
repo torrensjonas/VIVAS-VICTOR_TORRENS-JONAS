@@ -1,10 +1,8 @@
 package com.backend.clinicaodontologica.service.inplementacion;
 
-import com.backend.clinicaodontologica.dto.entrada.paciente.DomicilioEntradaDto;
 import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
-import com.backend.clinicaodontologica.entity.Domicilio;
 import com.backend.clinicaodontologica.entity.Paciente;
 import com.backend.clinicaodontologica.repository.PacienteRepository;
 import com.backend.clinicaodontologica.service.IPacienteService;
@@ -12,13 +10,9 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 
@@ -29,11 +23,10 @@ public class PacienteService implements IPacienteService {
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
 	public PacienteService(PacienteRepository iPacienteRepository, ModelMapper modelMapper) {
 		this.iPacienteRepository = iPacienteRepository;
 		this.modelMapper = modelMapper;
-		configuracionMapping();
+		configuracionMapeoPaciente();
 	}
 
 
@@ -53,12 +46,7 @@ public class PacienteService implements IPacienteService {
 	public List<PacienteSalidaDto> listarPacientes() {
 		List<PacienteSalidaDto> pacienteSalidaDtos = iPacienteRepository.findAll().stream()
 				.map(paciente -> modelMapper.map(paciente, PacienteSalidaDto.class)).toList();
-		//List<Paciente> pacientes = pacienteIDao.listarTodos();
-		//List<PacienteSalidaDto> pacienteSalidaDtos = new ArrayList<>();
-		//for (Paciente paciente : pacientes){
-		//    PacienteSalidaDto pacienteSalidaDto = modelMapper.map(paciente, PacienteSalidaDto.class);
-		//    pacienteSalidaDtos.add(pacienteSalidaDto);
-		//}
+
 		LOGGER.info("Listado de todos los pacientes:{}", JsonPrinter.toString(pacienteSalidaDtos));
 
 		return pacienteSalidaDtos;
@@ -75,56 +63,23 @@ public class PacienteService implements IPacienteService {
 		} else LOGGER.error("El id no se encuentra registrado en la base de datos");
 		return pacinteEncontrado;
 	}
+
 	@Override
-	public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto pacienteDto) {
-		Long pacienteId = pacienteDto.getId();
+	public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto paciente) {
+		Paciente pacienteRecibido = modelMapper.map(paciente, Paciente.class);
+		Paciente pacientegoActualizar = iPacienteRepository.findById(pacienteRecibido.getId()).orElse(null);
+		PacienteSalidaDto pacienteSalidaDto = null;
+		if (pacientegoActualizar != null) {
+			pacientegoActualizar = pacienteRecibido;
+			iPacienteRepository.save(pacientegoActualizar);
+			pacienteSalidaDto = modelMapper.map(pacientegoActualizar, PacienteSalidaDto.class);
+			LOGGER.warn("Odontologo actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
 
-
-		if (pacienteId == null) {
-			LOGGER.error("El ID del paciente a actualizar es nulo.");
-			return null; // o lanzar una excepción
-		}
-
-
-		// Recuperar el paciente existente por ID
-		Optional<Paciente> pacienteOptional = iPacienteRepository.findById(pacienteId);
-
-
-		if (pacienteOptional.isPresent()) {
-			Paciente pacienteActualizar = pacienteOptional.get();
-
-
-			// Actualizar propiedades del paciente directamente
-			pacienteActualizar.setNombre(pacienteDto.getNombre());
-			pacienteActualizar.setApellido(pacienteDto.getApellido());
-			pacienteActualizar.setDni(pacienteDto.getDni());
-			pacienteActualizar.setFechaIngreso(pacienteDto.getFechaIngreso());
-
-
-			// Actualizar la dirección
-			DomicilioEntradaDto domicilioDto = pacienteDto.getDomicilio();
-			Domicilio domicilio = new Domicilio();
-			domicilio.setCalle(domicilioDto.getCalle());
-			domicilio.setNumero(domicilioDto.getNumero());
-			domicilio.setLocalidad(domicilioDto.getLocalidad());
-			domicilio.setProvincia(domicilioDto.getProvincia());
-
-
-			pacienteActualizar.setDomicilio(domicilio);
-
-
-			// Guardar el paciente actualizado
-			iPacienteRepository.save(pacienteActualizar);
-
-
-			// Mapear y devolver el DTO del paciente actualizado
-			PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteActualizar, PacienteSalidaDto.class);
-			LOGGER.warn("Paciente actualizado: {}", JsonPrinter.toString(pacienteSalidaDto));
-			return pacienteSalidaDto;
 		} else {
-			LOGGER.error("No fue posible actualizar el paciente, no está en la base de datos.");
-			return null; // o lanzar una excepción
+			LOGGER.error("No fue pocible actualizar el paciente,no esta en la base datos");
+
 		}
+		return pacienteSalidaDto;
 	}
 
 
@@ -145,7 +100,7 @@ public class PacienteService implements IPacienteService {
 
 	//Se define un método llamado configuracionMapping con acceso privado (private),
 	// lo que significa que solo se puede acceder a este método desde dentro de la misma clase.
-	private void configuracionMapping() {
+	private void configuracionMapeoPaciente() {
 		//Dentro del método, se utiliza modelMapper,
 		// que es una instancia de la clase ModelMapper.
 		// ModelMapper es una biblioteca que se utiliza comúnmente para mapear (asignar)

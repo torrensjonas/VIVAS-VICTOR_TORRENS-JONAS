@@ -7,7 +7,6 @@ public class OdontologoSalidaDto {
 	private String apellido;
 
 
-
 	public OdontologoSalidaDto() {
 	}
 

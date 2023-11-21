@@ -45,7 +45,7 @@ public class PacienteController {
 	}
 
 	// PUT - Actualizar un paciente por ID
-	@PutMapping("/actualizar")
+	@PutMapping("/modificar/{id}")
 	public PacienteSalidaDto actualizarPaciente(@RequestBody PacienteModificacionEntradaDto paciente) {
 		return pacienteService.actualizarPaciente(paciente);
 	}

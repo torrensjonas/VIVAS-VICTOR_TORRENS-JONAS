@@ -14,36 +14,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/turnos")
 public class TurnoController {
+	private TurnoService turnoService;
+
 	public TurnoController(TurnoService turnoService) {
 		this.turnoService = turnoService;
 	}
 
-	private  TurnoService turnoService;
 	@PostMapping("/registrar")
-	private ResponseEntity<TurnoSalidaDto>registrarPaciente(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto){
-		return  new ResponseEntity<>(turnoService.registraTurno(turnoEntradaDto), HttpStatus.OK);
+	private ResponseEntity<TurnoSalidaDto> registrarPaciente(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) {
+		return new ResponseEntity<>(turnoService.registraTurno(turnoEntradaDto), HttpStatus.OK);
 
 	}
+
 	@GetMapping("/listar")
-	public ResponseEntity<List<TurnoSalidaDto>> listarTurnos(){
-		return  new ResponseEntity<>(turnoService.listarTurnos(),HttpStatus.OK);
+	public ResponseEntity<List<TurnoSalidaDto>> listarTurnos() {
+		return new ResponseEntity<>(turnoService.listarTurnos(), HttpStatus.OK);
 
 	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<TurnoSalidaDto>buscarTurnoPorId(@PathVariable Long id){
-		return new ResponseEntity<>(turnoService.buscarTurnoPorId(id),HttpStatus.OK);
+	public ResponseEntity<TurnoSalidaDto> buscarTurnoPorId(@PathVariable Long id) {
+		return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
 	}
+
 	@PutMapping("/actualizar")
-	public TurnoSalidaDto actualizarTurno (@RequestBody TurnoModificarEntradaDto turno){
+	public TurnoSalidaDto actualizarTurno(@RequestBody TurnoModificarEntradaDto turno) {
 		return turnoService.modificarTurno(turno);
 	}
+
 	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<?>eliminarTurno(@PathVariable Long id){
+	public ResponseEntity<?> eliminarTurno(@PathVariable Long id) {
 		try {
 			turnoService.eliminarTurno(id);
-			return new ResponseEntity<>("Turno eliminado correctamente",HttpStatus.OK);
-		}catch (Exception exception){
-			return  new ResponseEntity<>("Error al eliminar turno"+ exception.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.OK);
+		} catch (Exception exception) {
+			return new ResponseEntity<>("Error al eliminar turno" + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

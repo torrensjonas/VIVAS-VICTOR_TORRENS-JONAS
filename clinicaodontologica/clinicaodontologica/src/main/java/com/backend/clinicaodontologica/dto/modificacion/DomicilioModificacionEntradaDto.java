@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DomicilioModificacionEntradaDto {
-	@NotNull(message = "Debe proveerse el id del domicilio que se desea modificar")
+	//@NotNull(message = "Debe proveerse el id del domicilio que se desea modificar")
 	private Long id;
 
 	@NotNull(message = "El campo calle no puede ser nulo")

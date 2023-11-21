@@ -1,4 +1,4 @@
-public class PacienteServiceTest {
+//public class PacienteServiceTest {
 
 	/*private PacienteService pacienteService = new PacienteService(new PacienteDaoH2());
 
@@ -40,4 +40,4 @@ public class PacienteServiceTest {
 	}*/
 
 
-}
+//}
