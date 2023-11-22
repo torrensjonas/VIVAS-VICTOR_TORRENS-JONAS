@@ -101,4 +101,3 @@ public class PacienteModificacionEntradaDto {
 		this.domicilio = domicilio;
 	}
 }
-

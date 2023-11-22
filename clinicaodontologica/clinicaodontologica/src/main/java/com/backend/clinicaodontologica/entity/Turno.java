@@ -1,5 +1,8 @@
 package com.backend.clinicaodontologica.entity;
 
+import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -30,6 +33,9 @@ public class Turno {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public LocalDateTime getFechaYHora() {
 		return fechaYHora;

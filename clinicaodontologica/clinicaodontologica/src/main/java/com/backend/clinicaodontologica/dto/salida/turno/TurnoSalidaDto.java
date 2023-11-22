@@ -1,20 +1,20 @@
 package com.backend.clinicaodontologica.dto.salida.turno;
 
-import com.backend.clinicaodontologica.entity.Odontologo;
-import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 
 import java.time.LocalDateTime;
 
 public class TurnoSalidaDto {
 	private Long id;
 	private LocalDateTime fechaYHora;
-	private Odontologo odontologo;
-	private Paciente paciente;
+	private OdontologoSalidaDto odontologo;
+	private PacienteSalidaDto paciente;
 
 	public TurnoSalidaDto() {
 	}
 
-	public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+	public TurnoSalidaDto(Long id, LocalDateTime fechaYHora, OdontologoSalidaDto odontologo, PacienteSalidaDto paciente) {
 		this.id = id;
 		this.fechaYHora = fechaYHora;
 		this.odontologo = odontologo;
@@ -37,19 +37,19 @@ public class TurnoSalidaDto {
 		this.fechaYHora = fechaYHora;
 	}
 
-	public Odontologo getOdontologo() {
+	public OdontologoSalidaDto getOdontologo() {
 		return odontologo;
 	}
 
-	public void setOdontologo(Odontologo odontologo) {
+	public void setOdontologo(OdontologoSalidaDto odontologo) {
 		this.odontologo = odontologo;
 	}
 
-	public Paciente getPaciente() {
+	public PacienteSalidaDto getPaciente() {
 		return paciente;
 	}
 
-	public void setPaciente(Paciente paciente) {
+	public void setPaciente(PacienteSalidaDto paciente) {
 		this.paciente = paciente;
 	}
 }

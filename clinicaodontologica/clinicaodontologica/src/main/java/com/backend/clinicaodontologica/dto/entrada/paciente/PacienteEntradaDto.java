@@ -35,7 +35,7 @@ public class PacienteEntradaDto {
 	}
 
 	public PacienteEntradaDto(String nombre, String apellido, Long dni, LocalDate fechaIngreso,
-			DomicilioEntradaDto domicilio) {
+							  DomicilioEntradaDto domicilio) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;

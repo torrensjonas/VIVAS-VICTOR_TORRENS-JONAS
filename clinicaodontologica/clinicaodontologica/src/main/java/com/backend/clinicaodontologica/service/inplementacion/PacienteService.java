@@ -4,6 +4,7 @@ import com.backend.clinicaodontologica.dto.entrada.paciente.PacienteEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.PacienteModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.repository.PacienteRepository;
 import com.backend.clinicaodontologica.service.IPacienteService;
 import com.backend.clinicaodontologica.util.JsonPrinter;
@@ -26,7 +27,7 @@ public class PacienteService implements IPacienteService {
 	public PacienteService(PacienteRepository iPacienteRepository, ModelMapper modelMapper) {
 		this.iPacienteRepository = iPacienteRepository;
 		this.modelMapper = modelMapper;
-		configuracionMapeoPaciente();
+		configureMapping();
 	}
 
 
@@ -84,7 +85,8 @@ public class PacienteService implements IPacienteService {
 
 
 	@Override
-	public void eliminarPaciente(Long id) {
+	public void eliminarPaciente(Long id) throws ResourceNotFoundException {
+
 
 		if (iPacienteRepository.findById(id).orElse(null) != null) {
 
@@ -93,30 +95,18 @@ public class PacienteService implements IPacienteService {
 
 		} else {
 			LOGGER.error("No se ha encontrado el paciente con id:{}", id);
-
+			throw new ResourceNotFoundException("No se ha encontrado el pacinte con id" + id);
 		}
 	}
 
-
-	//Se define un método llamado configuracionMapping con acceso privado (private),
-	// lo que significa que solo se puede acceder a este método desde dentro de la misma clase.
-	private void configuracionMapeoPaciente() {
-		//Dentro del método, se utiliza modelMapper,
-		// que es una instancia de la clase ModelMapper.
-		// ModelMapper es una biblioteca que se utiliza comúnmente para mapear (asignar)
-		// datos de un objeto a otro de manera automática y flexible.
+	private void configureMapping() {
 		modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
-				//Se utiliza el método typeMap de modelMapper para configurar un mapeo entre dos clases:
-				// PacienteEntradaDto y Paciente. Esto significa que se está indicando cómo copiar
-				// datos de un objeto de tipo PacienteEntradaDto a un objeto de tipo Paciente.
-				.addMapping(PacienteEntradaDto::getDomicilio, Paciente::setDomicilio);
-		//Se utiliza el método addMapping para especificar cómo se debe asignar un campo específico entre las dos clases.
-		// En este caso, se está indicando que el campo domicilioEntradaDto de PacienteEntradaDto debe asignarse al campo
-		// domicilio de la clase Paciente.
-
-		// Configurar un mapeo inverso de Paciente a PacienteSalidaDto
+				.addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilio, Paciente::setDomicilio));
 		modelMapper.typeMap(Paciente.class, PacienteSalidaDto.class)
-				.addMapping(Paciente::getDomicilio, PacienteSalidaDto::setDomicilio);
+				.addMappings(modelMapper -> modelMapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilio));
+		modelMapper.typeMap(PacienteEntradaDto.class, Paciente.class)
+				.addMappings(mapper -> mapper.map(PacienteEntradaDto::getDomicilio, Paciente::setDomicilio));
+
 	}
 
 

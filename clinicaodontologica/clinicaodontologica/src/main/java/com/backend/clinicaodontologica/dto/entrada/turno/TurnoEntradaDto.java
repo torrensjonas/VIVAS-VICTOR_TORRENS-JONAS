@@ -55,5 +55,3 @@ public class TurnoEntradaDto {
 		this.paciente = paciente;
 	}
 }
-
-

@@ -3,6 +3,8 @@ package com.backend.clinicaodontologica.controller;
 import com.backend.clinicaodontologica.dto.entrada.turno.TurnoEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.TurnoModificarEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.turno.TurnoSalidaDto;
+import com.backend.clinicaodontologica.exceptions.BadRequestException;
+import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import com.backend.clinicaodontologica.service.inplementacion.TurnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,9 @@ public class TurnoController {
 	}
 
 	@PostMapping("/registrar")
-	private ResponseEntity<TurnoSalidaDto> registrarPaciente(@RequestBody @Valid TurnoEntradaDto turnoEntradaDto) {
-		return new ResponseEntity<>(turnoService.registraTurno(turnoEntradaDto), HttpStatus.OK);
+	private ResponseEntity<TurnoSalidaDto> registrarPaciente(@RequestBody @Valid TurnoEntradaDto turno)
+			throws BadRequestException {
+		return new ResponseEntity<>(turnoService.registrarTurno(turno), HttpStatus.OK);
 
 	}
 
@@ -43,12 +46,10 @@ public class TurnoController {
 	}
 
 	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<?> eliminarTurno(@PathVariable Long id) {
-		try {
-			turnoService.eliminarTurno(id);
-			return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.OK);
-		} catch (Exception exception) {
-			return new ResponseEntity<>("Error al eliminar turno" + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<?> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
+
+		turnoService.eliminarTurno(id);
+		return new ResponseEntity<>("Turno eliminado correctamente", HttpStatus.OK);
+
 	}
 }
