@@ -1,22 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-
+    const url ="http://localhost:8081/api"
     const formulario = document.querySelector("#registro_formulario_paciente");
-    console.log(formulario);
-    const matricula = document.querySelector("#nombre");
-    console.log(matricula);
+  const matricula = document.querySelector("#nombre");
     const nombre = document.querySelector("#apellido");
-    console.log(nombre);
     const dni = document.querySelector("#dni");
-    console.log(apellido);
-    const fechaIngreso = document.querySelector("#fechaIngreso");
+   const fechaIngreso = document.querySelector("#fechaIngreso");
     const calle = document.querySelector("#calle");
     const numero = document.querySelector("#numero");
     const localidad = document.querySelector("#localidad");
     const provincia = document.querySelector("#provincia")
-
+    // Asigna el evento al botón de cargar Paciente
     formulario.addEventListener("submit", function (event) {
         event.preventDefault();
-
+        //datos del paciente
         const pacienteData = {
             nombre: nombre.value,
             apellido: apellido.value,
@@ -44,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function realizaRegistro(setting) {
         console.log("Lanzando la consulta a la API");
-        fetch("http://localhost:8081/api/pacientes/registrar", setting)
+        fetch(`${url}/pacientes/registrar`, setting)
             .then(respuesta => {
                 if (!respuesta.ok) {
                     throw new Error("Algunos de los datos son incorrectos");
@@ -57,13 +53,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     icon: 'success',
                     title: 'Paciente Creado ',
                     showConfirmButton: false,
-                    timer: 2000  // 2000 milisegundos = 2 segundos, ajusta según tus necesidades
+                    timer: 2000  
                 });
                 formulario.reset();
             })
             .catch(error => {
                 console.error(`Error: ${error}`);
-                alert("Error al registrar el Paciente");
+                mostrarError()
             });
+    }
+    function mostrarError() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al registrar el paciente',
+            text: 'Hubo un problema al intentar crear el paciente. Por favor, inténtalo de nuevo.',
+            confirmButtonText: 'Entendido'
+        });
     }
 })

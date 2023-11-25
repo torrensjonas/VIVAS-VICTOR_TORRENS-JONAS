@@ -5,11 +5,13 @@ import com.backend.clinicaodontologica.entity.Paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TurnoModificarEntradaDto {
@@ -18,7 +20,7 @@ public class TurnoModificarEntradaDto {
 	@NotNull(message = "La fecha y hora no puede ser nula")
 	@NotBlank(message = "El campo fecha no puede estar en blanco")
 	@FutureOrPresent(message = "La fecha y hora no puede ser anterior al día de hoy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime fechaYHora;
 
 	@NotNull(message = "El odontólogo no puede ser nulo")
