@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class OdontologoEntradaDto {
 	@NotNull(message = "La matricula del odontologo no puede ser nulo")
 	@NotBlank(message = "Debe especificar la matricula del odontologo")
-	@Size(min = 3, max = 10, message = "La matricula debe tener minimo 3 y maximo 10 caracteres")
+	@Size(min = 5, message = "La matricula debe tener minimo  10 caracteres")
 	private String matricula;
 	@NotNull(message = "El nombre del odontolo no puede ser nulo")
 	@NotBlank(message = "El nombre del odontolo no pueder estar vacio")

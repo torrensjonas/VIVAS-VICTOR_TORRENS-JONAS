@@ -1,5 +1,5 @@
-
 package com.backend.clinicaodontologica.dto.modificacion;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 public class OdontologoModificacionEntradaDto {
 	@NotNull(message = "Debe proveerse el id del odontologo que se desea modificar")
 	private Long id;
-
 	@NotNull(message = "La matricula del odontólogo no puede ser nula")
 	@NotBlank(message = "Debe especificarse la matricula del odontólogo")
 	@Size(min = 10, message = "El campo debe tener mínimo 10 caracteres")
@@ -68,4 +67,5 @@ public class OdontologoModificacionEntradaDto {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
 }

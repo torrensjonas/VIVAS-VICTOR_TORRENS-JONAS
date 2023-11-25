@@ -3,31 +3,31 @@ package com.backend.clinicaodontologica.dto.entrada.paciente;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 //Todos los datos que le pediremos al Paciente que ingrece
 
 public class PacienteEntradaDto {
 	@NotNull(message = "El campo nombre no puede ser nulo")
 	@NotBlank(message = "El campo nombre no puede estar en blanco")
-	@Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
+	@Size(max = 50, message = "El nombre debe tener hasta 50 caracteres")
 	private String nombre;
 
 	@NotNull(message = "El campo apellido no puede ser nulo")
 	@NotBlank(message = "El campo apellido no puede estar en blanco")
-	@Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
+	@Size(max = 50, message = "El apellido debe tener hasta  50 caracteres")
 	private String apellido;
 
 	@NotNull(message = "El campo DNI no puede ser nulo")
+	@Digits(integer = 20, fraction = 0, message = "El número del  DNI no puede tener más de 20 digitos")
 	private Long dni;
 	@FutureOrPresent(message = "La fecha no puede ser anterior al dia de hoy")
+	@NotBlank(message = "El campo fecha no puede estar en blanco")
 	@NotNull(message = "La fecha de ingreso no puede ser nula")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate fechaIngreso;
 	@NotNull(message = "La domicilio del paciente  no puede ser nula")
+	@NotBlank(message = "El campo domicilio no puede estar en blanco")
 	@Valid
 	private DomicilioEntradaDto domicilio;
 

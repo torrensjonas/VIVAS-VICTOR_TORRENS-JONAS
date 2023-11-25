@@ -20,7 +20,7 @@ function cargarListaPacientes() {
                 fila.innerHTML = `<td>${paciente.nombre}</td><td>${paciente.apellido}</td><td>${paciente.dni}</td>
                     <td>${paciente.fechaIngreso}</td><td>${paciente.domicilio.calle}</td>
                     <td>${paciente.domicilio.numero}</td><td>${paciente.domicilio.localidad}</td>
-                    <td>${paciente.domicilio.provincia}</td>
+                    <td>${paciente.domicilio.provincia}</td><td>${paciente.id}</td>
                     <td>
                     <button onclick="eliminarPaciente(${paciente.id})"><ion-icon name="trash-outline"></ion-icon></button>
                     <button onclick="modificarPaciente(${paciente.id})"><ion-icon name="create-outline"><</button>
@@ -37,10 +37,11 @@ function cargarListaOdontologos() {
         .then(data => {
             const cuerpoTablaOdontologos = document.getElementById('cuerpoTablaOdontologos');
             cuerpoTablaOdontologos.innerHTML = '';
+            console.log(data);
 
             data.forEach(odontologo => {
                 const fila = document.createElement('tr');
-                fila.innerHTML = `<td>${odontologo.nombre}</td><td>${odontologo.apellido}</td><td>${odontologo.matricula}</td>
+                fila.innerHTML = `<td>${odontologo.nombre}</td><td>${odontologo.apellido}</td><td>${odontologo.matricula}</td><td>${odontologo.id}</td>
                 <td>
                 <button onclick="eliminarOdontologo(${odontologo.id})"><ion-icon name="trash-outline"></ion-icon></button>
                 <button onclick="modificarOdontologo(${odontologo.id})"><ion-icon name="create-outline"><</ion-icon></button>

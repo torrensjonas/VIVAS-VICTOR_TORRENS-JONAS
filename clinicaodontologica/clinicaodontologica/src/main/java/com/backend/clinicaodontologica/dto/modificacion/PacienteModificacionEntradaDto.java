@@ -1,21 +1,18 @@
 package com.backend.clinicaodontologica.dto.modificacion;
 
-import com.backend.clinicaodontologica.dto.entrada.paciente.DomicilioEntradaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.Valid;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class PacienteModificacionEntradaDto {
 
-	//@NotNull(message = "Debe proveerse el id del paciente que se desea modificar")
+	@NotNull(message = "Debe proveerse el id del paciente que se desea modificar")
+	@NotBlank(message = "Debe especificarse el id del paciente")
 	private Long id;
 
 	@NotNull(message = "El nombre del paciente no puede ser nulo")
@@ -29,8 +26,8 @@ public class PacienteModificacionEntradaDto {
 	private String apellido;
 
 	@NotNull(message = "El dni del paciente no puede ser nulo")
-	@Size(max = 12, message = "El nombre debe tener hasta 12 digitos")
-	private Integer dni;
+	@Digits(integer = 20, fraction = 0, message = "El número no puede tener más de 20 dígitos")
+	private Long dni;
 
 	@FutureOrPresent(message = "La fecha no puede ser anterior al día de hoy")
 	@NotNull(message = "Debe especificarse la fecha de ingreso del paciente")
@@ -39,12 +36,12 @@ public class PacienteModificacionEntradaDto {
 
 	@NotNull(message = "El domicilio del paciente no puede ser nulo")
 	@Valid
-	private DomicilioEntradaDto domicilio;
+	private DomicilioModificacionEntradaDto domicilio;
 
 	public PacienteModificacionEntradaDto() {
 	}
 
-	public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Integer dni, LocalDate fechaIngreso, DomicilioEntradaDto domicilio) {
+	public PacienteModificacionEntradaDto(Long id, String nombre, String apellido, Long dni, LocalDate fechaIngreso, DomicilioModificacionEntradaDto domicilio) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -77,11 +74,11 @@ public class PacienteModificacionEntradaDto {
 		this.apellido = apellido;
 	}
 
-	public Integer getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(Integer dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 
@@ -93,11 +90,11 @@ public class PacienteModificacionEntradaDto {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public DomicilioEntradaDto getDomicilio() {
+	public DomicilioModificacionEntradaDto getDomicilio() {
 		return domicilio;
 	}
 
-	public void setDomicilio(DomicilioEntradaDto domicilio) {
+	public void setDomicilio(DomicilioModificacionEntradaDto domicilio) {
 		this.domicilio = domicilio;
 	}
 }

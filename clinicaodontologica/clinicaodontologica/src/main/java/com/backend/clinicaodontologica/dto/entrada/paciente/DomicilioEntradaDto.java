@@ -9,12 +9,11 @@ import javax.validation.constraints.NotNull;
 //Todos  son von Bin Validecion
 
 public class DomicilioEntradaDto {
-	@NotNull(message = "la calle no puede ser nula")
+	@NotNull(message = " El campo  calle no puede ser nula")
 	@NotBlank(message = "El campo calle no puede estar en blanco")
 	private String calle;
 	@NotNull(message = "El campo numero no puede ser nulo")
 	@Digits(integer = 8, fraction = 0, message = "El numero debe tener como maximo 8 digitos")
-	//@Pattern(regexp = "\\d{1,8}", message = "El número debe tener como máximo 8 dígitos")
 	private Integer numero;
 	@NotNull(message = "la campo localidad no puede ser nula")
 	@NotBlank(message = "El campo localidad no puede estar en blanco")

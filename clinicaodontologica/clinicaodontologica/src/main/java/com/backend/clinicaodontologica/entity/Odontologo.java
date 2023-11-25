@@ -9,8 +9,11 @@ public class Odontologo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(length = 20)
 	private String matricula;
+	@Column(length = 50)
 	private String nombre;
+	@Column(length = 50)
 	private String apellido;
 
 	public Odontologo() {
@@ -27,6 +30,9 @@ public class Odontologo {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getMatricula() {
 		return matricula;

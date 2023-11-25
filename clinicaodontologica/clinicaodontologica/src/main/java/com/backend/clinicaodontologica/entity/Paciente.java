@@ -13,11 +13,11 @@ public class Paciente {
 	private String nombre;
 	@Column(length = 50)
 	private String apellido;
-	@Column(length = 50)
+	@Column(length = 20)
 	private Long dni;
 	private LocalDate fechaIngreso;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "domicilio_id", referencedColumnName = "id")
+	@JoinColumn(name = "domicilio_id",referencedColumnName = "id")
 	private Domicilio domicilio;
 
 
@@ -36,6 +36,9 @@ public class Paciente {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -62,7 +65,7 @@ public class Paciente {
 	}
 
 	public LocalDate getFechaIngreso() {
-		return fechaIngreso;
+		return this.fechaIngreso;
 	}
 
 	public void setFechaIngreso(LocalDate fechaIngreso) {

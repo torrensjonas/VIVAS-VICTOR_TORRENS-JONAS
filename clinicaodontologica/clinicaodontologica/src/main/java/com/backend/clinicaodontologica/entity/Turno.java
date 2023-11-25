@@ -1,8 +1,5 @@
 package com.backend.clinicaodontologica.entity;
 
-import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
-import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
