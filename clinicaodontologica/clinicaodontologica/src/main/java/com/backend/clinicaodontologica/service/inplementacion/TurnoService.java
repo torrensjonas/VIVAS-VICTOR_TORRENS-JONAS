@@ -45,7 +45,6 @@ public class TurnoService implements ITurnoService {
 		return turnoSalidaDtos;
 	}
 
-
 	@Override
 	public TurnoSalidaDto registrarTurno(TurnoEntradaDto turno) throws BadRequestException, ResourceNotFoundException {
 		Turno turnoARegistrar = modelMapper.map(turno, Turno.class);
@@ -144,4 +143,5 @@ public class TurnoService implements ITurnoService {
 				.addMappings(mapper -> mapper.map(Turno::getOdontologo, TurnoEntradaDto::setOdontologo));
 	}
 }
+
 

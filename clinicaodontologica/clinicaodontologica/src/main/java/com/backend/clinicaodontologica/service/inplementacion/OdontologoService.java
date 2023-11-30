@@ -1,6 +1,5 @@
 package com.backend.clinicaodontologica.service.inplementacion;
 
-
 import com.backend.clinicaodontologica.dto.entrada.odontologo.OdontologoEntradaDto;
 import com.backend.clinicaodontologica.dto.modificacion.OdontologoModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
@@ -12,7 +11,6 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +23,6 @@ public class OdontologoService implements IOdontologoService {
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
 	public OdontologoService(OdontologoRepository odontologoRepository, ModelMapper modelMapper) {
 		this.odontologoRepository = odontologoRepository;
 		this.modelMapper = modelMapper;
@@ -33,15 +30,11 @@ public class OdontologoService implements IOdontologoService {
 
 	}
 
-
 	@Override
 	public OdontologoSalidaDto registrarOdontologo(OdontologoEntradaDto odontologo) {
-		//convertimos mediante el mapper de dtoEntrada a entidad
 		LOGGER.info("OdontologEntredaDto:" + JsonPrinter.toString(odontologo));
 		Odontologo odontologoEntidad = modelMapper.map(odontologo, Odontologo.class);
-		//mandamos a persistir a la capa dao y obtenemos una entidad
 		Odontologo odontologoAPersistir = odontologoRepository.save(odontologoEntidad);
-		//transformamos la entidad obtenida en salidaDto
 		OdontologoSalidaDto odontologoSalidaDto = modelMapper.map(odontologoAPersistir, OdontologoSalidaDto.class);
 		LOGGER.info("OdontologoSalidaDto:" + JsonPrinter.toString(odontologoSalidaDto));
 		return odontologoSalidaDto;
@@ -73,7 +66,8 @@ public class OdontologoService implements IOdontologoService {
 	}
 
 	@Override
-	public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo) throws ResourceNotFoundException {
+	public OdontologoSalidaDto actualizarOdontologo(OdontologoModificacionEntradaDto odontologo)
+			throws ResourceNotFoundException {
 		Odontologo odontologoRecibido = modelMapper.map(odontologo, Odontologo.class);
 		Odontologo odontologoAActualizar = odontologoRepository.findById(odontologoRecibido.getId()).orElse(null);
 
@@ -90,10 +84,8 @@ public class OdontologoService implements IOdontologoService {
 			throw new ResourceNotFoundException("Id no existe");
 		}
 
-
 		return odontologoSalidaDto;
 	}
-
 
 	@Override
 	public void eliminarOdontologo(Long id) throws ResourceNotFoundException {
@@ -112,6 +104,4 @@ public class OdontologoService implements IOdontologoService {
 		modelMapper.typeMap(OdontologoEntradaDto.class, Odontologo.class);
 		modelMapper.typeMap(Odontologo.class, OdontologoSalidaDto.class);
 	}
-
-
 }

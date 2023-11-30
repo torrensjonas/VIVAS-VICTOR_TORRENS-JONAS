@@ -1,7 +1,4 @@
 package com.backend.clinicaodontologica.entity;
-//json -> dto Controlador dto -> servicio dto -> entidad -> repository (dao) ->
-// entidad a BD -> repositoy -> servicio entidad a dto -> controlador -> dto @ResposeBody (dentro de @RestController) -> json
-
 
 import javax.persistence.*;
 

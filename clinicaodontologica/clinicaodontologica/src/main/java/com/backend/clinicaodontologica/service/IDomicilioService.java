@@ -1,7 +1,5 @@
 package com.backend.clinicaodontologica.service;
 
-
-import com.backend.clinicaodontologica.dto.modificacion.DomicilioModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.DomicilioSalidaDto;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;

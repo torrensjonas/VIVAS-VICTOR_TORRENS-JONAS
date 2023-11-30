@@ -1,7 +1,7 @@
 package com.backend.clinicaodontologica.dto.entrada.turno;
 
-import com.backend.clinicaodontologica.entity.Odontologo;
-import com.backend.clinicaodontologica.entity.Paciente;
+import com.backend.clinicaodontologica.dto.salida.odontologo.OdontologoSalidaDto;
+import com.backend.clinicaodontologica.dto.salida.paciente.PacienteSalidaDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
@@ -15,21 +15,21 @@ public class TurnoEntradaDto {
 	@NotNull(message = "La fecha y hora no puede ser nula")
 	@NotBlank(message = "El campo fecha no puede estar en blanco")
 	@FutureOrPresent(message = "La fecha y hora no puede ser anterior al día de hoy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime fechaYHora;
 
-	@NotNull(message = "El odontólogo no puede ser nulo")
-	@Valid // Para habilitar la validación de cascada en el objeto Odontologo
-	private Odontologo odontologo;
+	@NotNull(message = "El odontólogo debe estar registrado en la base de datos")
+	@Valid
+	private OdontologoSalidaDto odontologo;
 
-	@NotNull(message = "El paciente no puede ser nulo")
-	@Valid // Para habilitar la validación de cascada en el objeto Paciente
-	private Paciente paciente;
+	@NotNull(message = "El paciente debe estar registrado en la base de datos")
+	@Valid
+	private PacienteSalidaDto paciente;
 
 	public TurnoEntradaDto() {
 	}
 
-	public TurnoEntradaDto(LocalDateTime fechaYHora, Odontologo odontologo, Paciente paciente) {
+	public TurnoEntradaDto(LocalDateTime fechaYHora, OdontologoSalidaDto odontologo, PacienteSalidaDto paciente) {
 		this.fechaYHora = fechaYHora;
 		this.odontologo = odontologo;
 		this.paciente = paciente;
@@ -43,19 +43,20 @@ public class TurnoEntradaDto {
 		this.fechaYHora = fechaYHora;
 	}
 
-	public Odontologo getOdontologo() {
+	public OdontologoSalidaDto getOdontologo() {
 		return odontologo;
 	}
 
-	public void setOdontologo(Odontologo odontologo) {
+	public void setOdontologo(OdontologoSalidaDto odontologo) {
 		this.odontologo = odontologo;
 	}
 
-	public Paciente getPaciente() {
+	public PacienteSalidaDto getPaciente() {
 		return paciente;
 	}
 
-	public void setPaciente(Paciente paciente) {
+	public void setPaciente(PacienteSalidaDto paciente) {
 		this.paciente = paciente;
 	}
 }
+

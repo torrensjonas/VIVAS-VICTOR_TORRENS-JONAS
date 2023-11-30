@@ -28,6 +28,7 @@ public class TurnoController {
 		this.turnoService = turnoService;
 	}
 
+	// POST - Crear un nuevo turno
 	@Operation(summary = "Registrar un nuevo turno")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Turno registrado correctamente",
@@ -46,6 +47,7 @@ public class TurnoController {
 		return new ResponseEntity<>(turnoService.registrarTurno(turno), HttpStatus.OK);
 	}
 
+	// GET - Listar todos los turnos
 	@Operation(summary = "Listar todos los turnos")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Listado de turnos obtenido correctamente",
@@ -59,6 +61,7 @@ public class TurnoController {
 		return new ResponseEntity<>(turnoService.listarTurnos(), HttpStatus.OK);
 	}
 
+	// GET - Buscar un turno por ID
 	@Operation(summary = "Buscar un turno por ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Turno obtenido correctamente",
@@ -76,6 +79,7 @@ public class TurnoController {
 		return new ResponseEntity<>(turnoService.buscarTurnoPorId(id), HttpStatus.OK);
 	}
 
+	//PUT Actualizar turno por su ID
 	@Operation(summary = "Actualizar un turno")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Turno actualizado correctamente",
@@ -95,6 +99,7 @@ public class TurnoController {
 		return turnoService.modificarTurno(turno);
 	}
 
+	//DELET Eliminar turno por su ID
 	@Operation(summary = "Eliminar un turno por ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "Turno eliminado correctamente",

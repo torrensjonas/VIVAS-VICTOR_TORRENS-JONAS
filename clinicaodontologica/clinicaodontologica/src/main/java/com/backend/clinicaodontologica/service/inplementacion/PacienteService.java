@@ -13,7 +13,6 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,24 +27,19 @@ public class PacienteService implements IPacienteService {
 
 	private final ModelMapper modelMapper;
 
-	@Autowired
-	public PacienteService(PacienteRepository pacienteRepository, DomicilioRepository domicilioRepository, ModelMapper modelMapper) {
+	public PacienteService(PacienteRepository pacienteRepository, DomicilioRepository domicilioRepository,
+						   ModelMapper modelMapper) {
 		this.pacienteRepository = pacienteRepository;
-		
 		this.domicilioRepository = domicilioRepository;
 		this.modelMapper = modelMapper;
 		configureMapping();
 	}
 
-
 	@Override
 	public PacienteSalidaDto registrarPaciente(PacienteEntradaDto paciente) {
-		//convertimos mediante el mapper de dtoEntrada a entidad
 		LOGGER.info("PacienteEntredaDto:" + JsonPrinter.toString(paciente));
 		Paciente pacienteEntidad = modelMapper.map(paciente, Paciente.class);
-		//mandamos a persistir a la capa dao y obtenemos una entidad
 		Paciente pacienteAPersistir = pacienteRepository.save(pacienteEntidad);
-		//transformamos la entidad obtenida en salidaDto
 		PacienteSalidaDto pacienteSalidaDto = modelMapper.map(pacienteAPersistir, PacienteSalidaDto.class);
 		LOGGER.info("PacienteSalidaDto:" + JsonPrinter.toString(pacienteSalidaDto));
 		return pacienteSalidaDto;
@@ -60,7 +54,6 @@ public class PacienteService implements IPacienteService {
 		return pacienteSalidaDtos;
 	}
 
-
 	@Override
 	public PacienteSalidaDto buscarPacientePorId(Long id) throws ResourceNotFoundException {
 		Paciente pacienteBuscado = pacienteRepository.findById(id).orElse(null);
@@ -74,15 +67,18 @@ public class PacienteService implements IPacienteService {
 		}
 		return pacinteEncontrado;
 	}
+
 	@Override
-	public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto pacienteModificacionDto) throws ResourceNotFoundException {
+	public PacienteSalidaDto actualizarPaciente(PacienteModificacionEntradaDto pacienteModificacionDto)
+			throws ResourceNotFoundException {
 		Paciente pacienteRecibido = modelMapper.map(pacienteModificacionDto, Paciente.class);
 		Paciente pacienteAActualizar = pacienteRepository.findById(pacienteRecibido.getId()).orElse(null);
 		PacienteSalidaDto pacienteSalidaDto = null;
 
 		if (pacienteAActualizar != null) {
 			pacienteAActualizar = pacienteRecibido;
-			Domicilio domicilioExistente = domicilioRepository.findById(pacienteModificacionDto.getDomicilio().getId()).orElse(null);
+			Domicilio domicilioExistente = domicilioRepository.findById(pacienteModificacionDto.getDomicilio()
+					.getId()).orElse(null);
 
 			// Verificar que el domicilio con el id proporcionado existe en la base de datos
 			if (domicilioExistente == null) {
@@ -102,19 +98,15 @@ public class PacienteService implements IPacienteService {
 
 		} else {
 			LOGGER.error("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
-			throw new ResourceNotFoundException("No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
+			throw new ResourceNotFoundException(
+					"No fue posible actualizar el paciente porque no se encuentra en nuestra base de datos");
 		}
 
 		return pacienteSalidaDto;
 	}
 
-
-
-
-
 	@Override
 	public void eliminarPaciente(Long id) throws ResourceNotFoundException {
-
 
 		if (pacienteRepository.findById(id).orElse(null) != null) {
 
@@ -135,10 +127,8 @@ public class PacienteService implements IPacienteService {
 				.addMappings(modelMapper -> modelMapper.map(Paciente::getDomicilio, PacienteSalidaDto::setDomicilio));
 
 		modelMapper.typeMap(PacienteModificacionEntradaDto.class, Paciente.class)
-				.addMappings(mapper -> mapper.map(PacienteModificacionEntradaDto::getDomicilio, Paciente::setDomicilio));
-
+				.addMappings(
+						mapper -> mapper.map(PacienteModificacionEntradaDto::getDomicilio, Paciente::setDomicilio));
 
 	}
-
-
 }

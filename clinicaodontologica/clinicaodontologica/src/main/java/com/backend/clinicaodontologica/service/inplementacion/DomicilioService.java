@@ -1,7 +1,6 @@
 package com.backend.clinicaodontologica.service.inplementacion;
 
 import com.backend.clinicaodontologica.dto.entrada.paciente.DomicilioEntradaDto;
-import com.backend.clinicaodontologica.dto.modificacion.DomicilioModificacionEntradaDto;
 import com.backend.clinicaodontologica.dto.salida.paciente.DomicilioSalidaDto;
 import com.backend.clinicaodontologica.entity.Domicilio;
 import com.backend.clinicaodontologica.exceptions.ResourceNotFoundException;
@@ -11,7 +10,6 @@ import com.backend.clinicaodontologica.util.JsonPrinter;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +21,6 @@ public class DomicilioService implements IDomicilioService {
 	private DomicilioRepository domicilioRepository;
 	private ModelMapper modelMapper;
 
-	@Autowired
 	public DomicilioService(DomicilioRepository domicilioRepository, ModelMapper modelMapper) {
 		this.domicilioRepository = domicilioRepository;
 		this.modelMapper = modelMapper;
@@ -36,8 +33,7 @@ public class DomicilioService implements IDomicilioService {
 				.stream()
 				.map(domicilio -> modelMapper.map(domicilio, DomicilioSalidaDto.class))
 				.toList();
-		if (LOGGER.isInfoEnabled())
-			LOGGER.info("Listado de todos los domicilios: {}", JsonPrinter.toString(domicilioSalidaDtos));
+		LOGGER.info("Listado de todos los domicilios: {}", JsonPrinter.toString(domicilioSalidaDtos));
 		return domicilioSalidaDtos;
 	}
 
