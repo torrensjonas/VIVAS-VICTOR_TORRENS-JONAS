@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "d9b0488c-cae0-44b7-9a4b-1db86cfa6c62",
+		"name": "Clinica Odontologica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28090217"
+	},
+	"item": [
+		{
+			"name": "Domicilio",
+			"item": [
+				{
+					"name": "Domicilios-Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlD}}/listar",
+							"host": [
+								"{{BaseurlD}}"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Domicilio-Buscar-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlD}}/buscar?id=7",
+							"host": [
+								"{{BaseurlD}}"
+							],
+							"path": [
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Domicilio-Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"id\": 11,\r\n        \"calle\": \"\",\r\n        \"numero\": 2987,\r\n        \"localidad\": \"\",\r\n        \"provincia\": \"Carlos Paz\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlD}}/actualizar",
+							"host": [
+								"{{BaseurlD}}"
+							],
+							"path": [
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Domicilio-Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlD}}/40",
+							"host": [
+								"{{BaseurlD}}"
+							],
+							"path": [
+								"40"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "Paciente-Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Malena \",\r\n    \"apellido\": \"Sapata\",\r\n    \"dni\":5649853,\r\n    \"fechaIngreso\": \"2024-02-19\",\r\n    \"domicilio\": {\r\n        \"calle\": \"Ibsen\",\r\n        \"numero\":456,\r\n        \"localidad\": \"Formoza\",\r\n        \"provincia\": \"Arias\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlP}}/registrar",
+							"host": [
+								"{{BaseurlP}}"
+							],
+							"path": [
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pacientes-Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlP}}/listar",
+							"host": [
+								"{{BaseurlP}}"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paciente-Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlP}}/39",
+							"host": [
+								"{{BaseurlP}}"
+							],
+							"path": [
+								"39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paciente-Buscar-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlP}}/1",
+							"host": [
+								"{{BaseurlP}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paciente-Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Maria \",\r\n    \"apellido\": \"Hernandes\",\r\n    \"dni\": 5649853,\r\n    \"fechaIngreso\": [\r\n        2024,\r\n        2,\r\n        19\r\n    ],\r\n    \"domicilio\": {\r\n        \"id\":2 ,\r\n        \"calle\": \"\",\r\n        \"numero\": 456,\r\n        \"localidad\": \"Formoza\",\r\n        \"provincia\": \"Corrientes\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlP}}/actualizar",
+							"host": [
+								"{{BaseurlP}}"
+							],
+							"path": [
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Odontologo",
+			"item": [
+				{
+					"name": "Odontologo-Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"matricula\": \"TRR453\",\r\n    \"nombre\": \"Pablo \",\r\n    \"apellido\": \"Arguello\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlO}}/registrar",
+							"host": [
+								"{{BaseurlO}}"
+							],
+							"path": [
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Odontologo-Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlO}}/listar",
+							"host": [
+								"{{BaseurlO}}"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Odontologo-Buscar-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlO}}/1",
+							"host": [
+								"{{BaseurlO}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Odontologo-Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlO}}/13",
+							"host": [
+								"{{BaseurlO}}"
+							],
+							"path": [
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Odontologo-Modificar",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"matricula\": \"VHYUU673\",\r\n    \"nombre\": \"Theo\",\r\n    \"apellido\": \"Amiel\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlO}}/actualizar",
+							"host": [
+								"{{BaseurlO}}"
+							],
+							"path": [
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turnos",
+			"item": [
+				{
+					"name": "Turno-Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaYHora\": \"2024-11-18T10:00\",\r\n    \"odontologo\": {\r\n        \"id\": 1\r\n    },\r\n    \"paciente\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlT}}/registrar",
+							"host": [
+								"{{BaseurlT}}"
+							],
+							"path": [
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turnos-Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlT}}/listar",
+							"host": [
+								"{{BaseurlT}}"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turno-Buscar-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlT}}/3",
+							"host": [
+								"{{BaseurlT}}"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turno-Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BaseurlT}}/12",
+							"host": [
+								"{{BaseurlT}}"
+							],
+							"path": [
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Turno-Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\": 3,\r\n        \"fechaYHora\": [\r\n            2025,\r\n            11,\r\n            18,\r\n            10,\r\n            0\r\n        ],\r\n        \"odontologo\": {\r\n            \"id\": 2,\r\n            \"matricula\": \"TRR453\",\r\n            \"nombre\": \"Pablo \",\r\n            \"apellido\": \"Arguello\"\r\n        },\r\n        \"paciente\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Malena \",\r\n            \"apellido\": \"Sapata\",\r\n            \"dni\": 5649853,\r\n            \"fechaIngreso\": [\r\n                2024,\r\n                2,\r\n                19\r\n            ],\r\n            \"domicilio\": {\r\n                \"id\": 2,\r\n                \"calle\": \"Ibsen\",\r\n                \"numero\": 456,\r\n                \"localidad\": \"Formoza\",\r\n                \"provincia\": \"Arias\"\r\n            }\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseurlT}}/actualizar",
+							"host": [
+								"{{BaseurlT}}"
+							],
+							"path": [
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseurlD",
+			"value": "http://localhost:8081/api/domicilios",
+			"type": "string"
+		},
+		{
+			"key": "BaseurlO",
+			"value": "http://localhost:8081/api/odontologos",
+			"type": "string"
+		},
+		{
+			"key": "BaseurlP",
+			"value": "http://localhost:8081/api/pacientes",
+			"type": "string"
+		},
+		{
+			"key": "BaseurlT",
+			"value": "http://localhost:8081/api/turnos",
+			"type": "string"
+		}
+	]
+}
